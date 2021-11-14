@@ -1,0 +1,25 @@
+universe = vanilla
+
+log    = ./log/log_$(iter)_$(ell)
+error  = ./log/err_$(iter)_$(ell)
+output = ./log/out_$(iter)_$(ell)
+
+executable = run_R.sh
+notification = Error
+notify_user = yongsulee.chtc@gmail.com
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+initialdir = $(directory)
+transfer_input_files = http://proxy.chtc.wisc.edu/SQUID/chtc/R402.tar.gz, /home/ylee525/packages.tar.gz, ../simu_info_common.txt, ../master_script.R, ../glmdag-master/, ./simu_info.txt 
+arguments = $(iter) $(ell)
+
+request_cpus = 1
+request_memory = 1GB
+request_disk = 1024MB
+
+queue directory,iter,ell from queue_list
+
+## When there is a input
+# transfer_input_files = ..., ..., /home/ylee525/xx_codes_biomj/
+# transfer_input_files = ..., packages.tar.gz, script_test.R, $(type).RData
